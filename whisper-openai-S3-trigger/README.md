@@ -6,9 +6,9 @@
 
 ## Setup
 
-#### Clone the repo
+#### Download the trained whisper model
 
-```http
+```
   Downlad the whisper trained model from
   https://openaipublic.azureedge.net/main/whisper/models/ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e/base.pt
   and copy and rename it to local_base.pt in base folder
@@ -17,14 +17,14 @@
 #### Whisper module
 Git is not supported inside dockor. We will use another way to install whisper module inside container
 
-```http
+```
   
   git submodule add https://github.com/openai/whisper.git  _submodules/whisper
 ```
 
 #### Build dockor image
 Now build the dockor image
-```http
+```
   sudo docker build -t ecr_whisper .
 
 ```
@@ -33,18 +33,18 @@ Now build the dockor image
 ##### 1) Go to Amazon Elastic Container Registry
 ##### 2) Create a private repository as lambda doesn't support public ones :
 ##### 3. Now use this command to log in and obtain privileges
-```http
+```
   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <aws_account_id>.dkr.ecr.us-east-1.amazonaws.com
 
 ```
 ##### 4) Next use this command to add a tag to the image you have created
-```http
+```
   docker tag <docker_image_id> ecr_uri
 
 ```
 ##### 5) Run this to push the image to the repository in AWS.
 
-```http
+```
   docker push ecr_uri
 
 ```
